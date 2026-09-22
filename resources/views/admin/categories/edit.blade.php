@@ -17,7 +17,7 @@
             <h5 class="mb-0"><i class="bi bi-pencil-square me-2"></i>Edit Category Information</h5>
         </div>
         <div class="card-body">
-            <form action="{{ route('admin.categories.update', $category) }}" method="POST">
+            <form action="{{ route('admin.categories.update', $category) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 
@@ -43,6 +43,29 @@
                         </div>
                         <small class="text-muted">Leave blank if no icon needed</small>
                     </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="image" class="form-label">Category Image</label>
+                        <input type="file" class="form-control @error('image') is-invalid @enderror"
+                               id="image" name="image" accept="image/jpeg,image/png,image/webp">
+                        @error('image')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                        <small class="text-muted">JPEG, PNG or WEBP, max 2 MB</small>
+                    </div>
+                    @if($category->image)
+                        <div class="col-md-6">
+                            <label class="form-label d-block">Current Image</label>
+                            <img src="{{ $category->image }}" alt="{{ $category->name }}"
+                                 class="img-thumbnail mb-2" style="max-height: 120px;">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="remove_image" name="remove_image" value="1">
+                                <label class="form-check-label" for="remove_image">Remove current image</label>
+                            </div>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="row mb-4">

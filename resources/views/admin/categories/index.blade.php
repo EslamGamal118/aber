@@ -88,7 +88,10 @@
                             <td>{{ $category->id }}</td>
                             <td class="ps-4">
                                 <div class="d-flex align-items-center">
-                                    @if($category->icon)
+                                    @if($category->image)
+                                        <img src="{{ $category->image }}" alt="{{ $category->name }}"
+                                             class="rounded me-3" style="width: 40px; height: 40px; object-fit: cover;">
+                                    @elseif($category->icon)
                                         <div class="me-3">
                                             <i class="bi bi-{{ $category->icon }}" style="font-size: 1.25rem;"></i>
                                         </div>

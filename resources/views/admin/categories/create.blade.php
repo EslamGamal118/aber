@@ -17,7 +17,7 @@
             <h5 class="mb-0"><i class="bi bi-plus-circle me-2"></i>Category Information</h5>
         </div>
         <div class="card-body">
-            <form action="{{ route('admin.categories.store') }}" method="POST">
+            <form action="{{ route('admin.categories.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 
                 <div class="row mb-3">
@@ -41,6 +41,18 @@
                             @enderror
                         </div>
                         <small class="text-muted">Leave blank if no icon needed</small>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="image" class="form-label">Category Image</label>
+                        <input type="file" class="form-control @error('image') is-invalid @enderror"
+                               id="image" name="image" accept="image/jpeg,image/png,image/webp">
+                        @error('image')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                        <small class="text-muted">JPEG, PNG or WEBP, max 2 MB</small>
                     </div>
                 </div>
 
