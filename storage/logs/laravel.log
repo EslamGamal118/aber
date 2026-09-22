@@ -1082,3 +1082,104 @@
 #10 C:\\laragon\\www\\aber\\artisan(16): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
 #11 {main}
 "} 
+[2026-09-22 15:33:31] local.INFO: Sending OTP to 500000001 with code 1234  
+[2026-09-22 15:33:40] local.INFO: Sending OTP to 500200001 with code 8754  
+[2026-09-22 15:34:21] local.INFO: Sending OTP to 500000001 with code 1234  
+[2026-09-22 16:48:52] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"6341"} 
+[2026-09-22 16:48:54] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"3306"} 
+[2026-09-22 16:48:55] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"2909"} 
+[2026-09-22 16:48:55] testing.INFO: OTP issued {"phone":"05****9999","user_type":"vendor","bypassed":false,"code":"2361"} 
+[2026-09-22 16:48:55] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"6392"} 
+[2026-09-22 16:48:55] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"7376"} 
+[2026-09-22 16:48:55] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"6244"} 
+[2026-09-22 16:48:55] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"3352"} 
+[2026-09-22 16:48:55] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"7639"} 
+[2026-09-22 16:48:55] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"4352"} 
+[2026-09-22 16:48:55] testing.INFO: OTP issued {"phone":"05****0001","user_type":"client","bypassed":true,"code":"1234"} 
+[2026-09-22 16:48:55] testing.INFO: OTP issued {"phone":"05****0001","user_type":"client","bypassed":true,"code":"1234"} 
+[2026-09-22 16:48:56] testing.INFO: OTP issued {"phone":"05****0001","user_type":"client","bypassed":true,"code":"1234"} 
+[2026-09-22 16:48:56] testing.INFO: OTP issued {"phone":"05****0001","user_type":"client","bypassed":true,"code":"1234"} 
+[2026-09-22 16:48:56] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"2717"} 
+[2026-09-22 16:48:56] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"4386"} 
+[2026-09-22 16:48:56] testing.INFO: OTP issued {"phone":"05****9999","user_type":"vendor","bypassed":false,"code":"3319"} 
+[2026-09-22 16:48:56] testing.INFO: OTP issued {"phone":"05****0001","user_type":"client","bypassed":true,"code":"1234"} 
+[2026-09-22 16:48:56] testing.INFO: OTP issued {"phone":"05****0001","user_type":"client","bypassed":true,"code":"1234"} 
+[2026-09-22 16:48:57] testing.INFO: OTP issued {"phone":"05****0001","user_type":"client","bypassed":false,"code":"2372"} 
+[2026-09-22 16:49:08] testing.INFO: Al Rajhi payment initiation request {"service":"alrajhi","timestamp":"2026-09-22T16:49:08+00:00","correlation_id":"order_42","internal_order_id":42,"track_id":"42_1790095748","amount":"150.50","currency":"682"} 
+[2026-09-22 16:49:09] testing.INFO: Al Rajhi hosted page URL generated {"service":"alrajhi","timestamp":"2026-09-22T16:49:09+00:00","correlation_id":"order_42","internal_order_id":42,"payment_id":"100200300"} 
+[2026-09-22 16:49:09] testing.INFO: Al Rajhi payment initiation request {"service":"alrajhi","timestamp":"2026-09-22T16:49:09+00:00","correlation_id":"order_42","internal_order_id":42,"track_id":"42_1790095749","amount":"10.00","currency":"682"} 
+[2026-09-22 16:49:09] testing.INFO: Al Rajhi hosted page URL generated {"service":"alrajhi","timestamp":"2026-09-22T16:49:09+00:00","correlation_id":"order_42","internal_order_id":42,"payment_id":"1"} 
+[2026-09-22 16:49:09] testing.INFO: Al Rajhi payment initiation request {"service":"alrajhi","timestamp":"2026-09-22T16:49:09+00:00","correlation_id":"order_7","internal_order_id":7,"track_id":"7_1790095749","amount":"10.00","currency":"682"} 
+[2026-09-22 16:49:09] testing.ERROR: Al Rajhi payment initiation failed {"service":"alrajhi","timestamp":"2026-09-22T16:49:09+00:00","correlation_id":"order_7","internal_order_id":7,"status_code":200,"error_text":"Invalid Transportal ID"} 
+[2026-09-22 16:49:09] testing.INFO: Al Rajhi callback received {"service":"alrajhi","timestamp":"2026-09-22T16:49:09+00:00","correlation_id":"order_55","internal_order_id":55,"result":"CAPTURED","payment_id":"PAY-1","transaction_id":"TRX-1"} 
+[2026-09-22 16:49:09] testing.INFO: Al Rajhi callback received {"service":"alrajhi","timestamp":"2026-09-22T16:49:09+00:00","correlation_id":"order_56","internal_order_id":56,"result":"NOT CAPTURED"} 
+[2026-09-22 16:49:10] testing.ERROR: Al Rajhi callback payload could not be decoded {"service":"alrajhi","timestamp":"2026-09-22T16:49:10+00:00","correlation_id":"pay_6b81567a-ac2f-439c-9567-bcdd439662ae","ip":"127.0.0.1","has_trandata":true} 
+[2026-09-22 16:49:10] testing.ERROR: Al Rajhi callback payload could not be decoded {"service":"alrajhi","timestamp":"2026-09-22T16:49:10+00:00","correlation_id":"pay_929e6b01-4e06-4885-913f-c673a769a7c9","ip":"127.0.0.1"} 
+[2026-09-22 16:49:10] testing.ERROR: Al Rajhi callback: order not found {"service":"alrajhi","timestamp":"2026-09-22T16:49:10+00:00","correlation_id":"pay_ab382545-64ac-43d0-b497-93aaca4a57d6","track_id":"999_1","result":"CAPTURED"} 
+[2026-09-22 16:49:14] testing.INFO: Al Rajhi payment initiation request {"service":"alrajhi","timestamp":"2026-09-22T16:49:14+00:00","correlation_id":"order_1","internal_order_id":1,"track_id":"1_1790095754","amount":"50.00","currency":"682"} 
+[2026-09-22 16:49:14] testing.INFO: Al Rajhi hosted page URL generated {"service":"alrajhi","timestamp":"2026-09-22T16:49:14+00:00","correlation_id":"order_1","internal_order_id":1,"payment_id":"100200300"} 
+[2026-09-22 16:49:14] testing.INFO: Al Rajhi payment initiation request {"service":"alrajhi","timestamp":"2026-09-22T16:49:14+00:00","correlation_id":"order_1","internal_order_id":1,"track_id":"1_1790095754","amount":"25.00","currency":"682"} 
+[2026-09-22 16:49:14] testing.INFO: Al Rajhi hosted page URL generated {"service":"alrajhi","timestamp":"2026-09-22T16:49:14+00:00","correlation_id":"order_1","internal_order_id":1,"payment_id":"100200300"} 
+[2026-09-22 16:49:14] testing.INFO: Al Rajhi payment initiation request {"service":"alrajhi","timestamp":"2026-09-22T16:49:14+00:00","correlation_id":"order_1","internal_order_id":1,"track_id":"1_1790095754","amount":"25.00","currency":"682"} 
+[2026-09-22 16:49:14] testing.INFO: Al Rajhi hosted page URL generated {"service":"alrajhi","timestamp":"2026-09-22T16:49:14+00:00","correlation_id":"order_1","internal_order_id":1,"payment_id":"100200300"} 
+[2026-09-22 16:49:14] testing.INFO: Al Rajhi payment initiation request {"service":"alrajhi","timestamp":"2026-09-22T16:49:14+00:00","correlation_id":"order_1","internal_order_id":1,"track_id":"1_1790095754","amount":"25.00","currency":"682"} 
+[2026-09-22 16:49:14] testing.INFO: Al Rajhi hosted page URL generated {"service":"alrajhi","timestamp":"2026-09-22T16:49:14+00:00","correlation_id":"order_1","internal_order_id":1,"payment_id":"100200300"} 
+[2026-09-22 16:49:14] testing.INFO: Al Rajhi callback received {"service":"alrajhi","timestamp":"2026-09-22T16:49:14+00:00","correlation_id":"order_1","internal_order_id":1,"result":"CAPTURED","payment_id":"PAY-1","transaction_id":"TRX-1"} 
+[2026-09-22 16:49:14] testing.INFO: Payment status updated to paid - order released to provider {"service":"alrajhi","timestamp":"2026-09-22T16:49:14+00:00","correlation_id":"order_1","internal_order_id":1,"provider_id":1,"status":"pending","transaction_id":"TRX-1","payment_reference":"PAY-1"} 
+[2026-09-22 16:49:14] testing.INFO: Al Rajhi callback received {"service":"alrajhi","timestamp":"2026-09-22T16:49:14+00:00","correlation_id":"order_1","internal_order_id":1,"result":"CAPTURED","payment_id":"PAY-1","transaction_id":"TRX-1"} 
+[2026-09-22 16:49:14] testing.INFO: Order already paid - callback ignored {"service":"alrajhi","timestamp":"2026-09-22T16:49:14+00:00","correlation_id":"order_1","internal_order_id":1} 
+[2026-09-22 16:49:14] testing.INFO: Al Rajhi payment initiation request {"service":"alrajhi","timestamp":"2026-09-22T16:49:14+00:00","correlation_id":"order_1","internal_order_id":1,"track_id":"1_1790095754","amount":"25.00","currency":"682"} 
+[2026-09-22 16:49:14] testing.INFO: Al Rajhi hosted page URL generated {"service":"alrajhi","timestamp":"2026-09-22T16:49:14+00:00","correlation_id":"order_1","internal_order_id":1,"payment_id":"100200300"} 
+[2026-09-22 16:49:14] testing.INFO: Payment status updated to paid - order released to provider {"service":"alrajhi","timestamp":"2026-09-22T16:49:14+00:00","correlation_id":"order_1","internal_order_id":1,"provider_id":1,"status":"pending","transaction_id":"TRX-2","payment_reference":"PAY-2"} 
+[2026-09-22 16:49:15] testing.INFO: Provider notified of paid order {"service":"alrajhi","timestamp":"2026-09-22T16:49:15+00:00","correlation_id":"order_1","internal_order_id":1,"provider_id":1} 
+[2026-09-22 16:49:15] testing.INFO: Al Rajhi payment initiation request {"service":"alrajhi","timestamp":"2026-09-22T16:49:15+00:00","correlation_id":"order_1","internal_order_id":1,"track_id":"1_1790095755","amount":"25.00","currency":"682"} 
+[2026-09-22 16:49:15] testing.INFO: Al Rajhi hosted page URL generated {"service":"alrajhi","timestamp":"2026-09-22T16:49:15+00:00","correlation_id":"order_1","internal_order_id":1,"payment_id":"100200300"} 
+[2026-09-22 16:49:15] testing.INFO: Payment status updated to paid - order released to provider {"service":"alrajhi","timestamp":"2026-09-22T16:49:15+00:00","correlation_id":"order_1","internal_order_id":1,"provider_id":1,"status":"pending","transaction_id":"TRX-3","payment_reference":"100200300"} 
+[2026-09-22 16:49:15] testing.INFO: Provider notified of paid order {"service":"alrajhi","timestamp":"2026-09-22T16:49:15+00:00","correlation_id":"order_1","internal_order_id":1,"provider_id":1} 
+[2026-09-22 16:49:15] testing.INFO: Provider notified of paid order {"service":"alrajhi","timestamp":"2026-09-22T16:49:15+00:00","correlation_id":"order_1","internal_order_id":1,"provider_id":1} 
+[2026-09-22 16:49:15] testing.INFO: Provider notified of paid order {"service":"alrajhi","timestamp":"2026-09-22T16:49:15+00:00","correlation_id":"order_1","internal_order_id":1,"provider_id":1} 
+[2026-09-22 16:49:15] testing.INFO: Al Rajhi payment initiation request {"service":"alrajhi","timestamp":"2026-09-22T16:49:15+00:00","correlation_id":"order_1","internal_order_id":1,"track_id":"1_1790095755","amount":"25.00","currency":"682"} 
+[2026-09-22 16:49:15] testing.INFO: Al Rajhi hosted page URL generated {"service":"alrajhi","timestamp":"2026-09-22T16:49:15+00:00","correlation_id":"order_1","internal_order_id":1,"payment_id":"100200300"} 
+[2026-09-22 16:49:15] testing.INFO: Al Rajhi payment initiation request {"service":"alrajhi","timestamp":"2026-09-22T16:49:15+00:00","correlation_id":"order_1","internal_order_id":1,"track_id":"1_1790095755","amount":"25.00","currency":"682"} 
+[2026-09-22 16:49:15] testing.INFO: Al Rajhi hosted page URL generated {"service":"alrajhi","timestamp":"2026-09-22T16:49:15+00:00","correlation_id":"order_1","internal_order_id":1,"payment_id":"100200300"} 
+[2026-09-22 16:49:15] testing.INFO: Al Rajhi callback received {"service":"alrajhi","timestamp":"2026-09-22T16:49:15+00:00","correlation_id":"order_1","internal_order_id":1,"result":"NOT CAPTURED"} 
+[2026-09-22 16:49:15] testing.INFO: Payment status updated to failed - order remains hidden from provider {"service":"alrajhi","timestamp":"2026-09-22T16:49:15+00:00","correlation_id":"order_1","internal_order_id":1,"result":"NOT CAPTURED"} 
+[2026-09-22 16:49:15] testing.ERROR: Al Rajhi error URL hit {"service":"alrajhi","timestamp":"2026-09-22T16:49:15+00:00","correlation_id":"order_1","internal_order_id":1,"track_id":"1_1700000000","error_text":"Transaction cancelled by user"} 
+[2026-09-22 16:49:15] testing.INFO: Payment status updated to failed - order remains hidden from provider {"service":"alrajhi","timestamp":"2026-09-22T16:49:15+00:00","correlation_id":"order_1","internal_order_id":1,"result":"ERROR","error_text":"Transaction cancelled by user"} 
+[2026-09-22 16:49:15] testing.INFO: Al Rajhi payment initiation request {"service":"alrajhi","timestamp":"2026-09-22T16:49:15+00:00","correlation_id":"order_1","internal_order_id":1,"track_id":"1_1790095755","amount":"25.00","currency":"682"} 
+[2026-09-22 16:49:15] testing.INFO: Al Rajhi hosted page URL generated {"service":"alrajhi","timestamp":"2026-09-22T16:49:15+00:00","correlation_id":"order_1","internal_order_id":1,"payment_id":"100200300"} 
+[2026-09-22 16:49:15] testing.INFO: Al Rajhi payment initiation request {"service":"alrajhi","timestamp":"2026-09-22T16:49:15+00:00","correlation_id":"order_1","internal_order_id":1,"track_id":"1_1790095755","amount":"25.00","currency":"682"} 
+[2026-09-22 16:49:15] testing.INFO: Al Rajhi hosted page URL generated {"service":"alrajhi","timestamp":"2026-09-22T16:49:15+00:00","correlation_id":"order_1","internal_order_id":1,"payment_id":"100200300"} 
+[2026-09-22 16:49:15] testing.INFO: Payment status updated to paid - order released to provider {"service":"alrajhi","timestamp":"2026-09-22T16:49:15+00:00","correlation_id":"order_1","internal_order_id":1,"provider_id":1,"status":"pending","transaction_id":"TRX-4","payment_reference":"100200300"} 
+[2026-09-22 16:49:15] testing.INFO: Provider notified of paid order {"service":"alrajhi","timestamp":"2026-09-22T16:49:15+00:00","correlation_id":"order_1","internal_order_id":1,"provider_id":1} 
+[2026-09-22 16:49:15] testing.INFO: Al Rajhi callback received {"service":"alrajhi","timestamp":"2026-09-22T16:49:15+00:00","correlation_id":"order_1","internal_order_id":1,"result":"NOT CAPTURED"} 
+[2026-09-22 16:49:15] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"5983"} 
+[2026-09-22 16:49:15] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"3710"} 
+[2026-09-22 16:49:15] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"5734"} 
+[2026-09-22 16:49:15] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"0067"} 
+[2026-09-22 16:49:15] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"8150"} 
+[2026-09-22 16:49:15] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"0905"} 
+[2026-09-22 16:49:15] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"9939"} 
+[2026-09-22 16:49:15] testing.INFO: OTP issued {"phone":"05****9999","user_type":"vendor","bypassed":false,"code":"3919"} 
+[2026-09-22 16:49:15] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"6233"} 
+[2026-09-22 16:49:15] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"2535"} 
+[2026-09-22 16:49:16] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"3544"} 
+[2026-09-22 16:49:16] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"5894"} 
+[2026-09-22 16:49:16] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"4430"} 
+[2026-09-22 16:49:16] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"4933"} 
+[2026-09-22 16:49:16] testing.INFO: OTP issued {"phone":"05****0001","user_type":"client","bypassed":true,"code":"1234"} 
+[2026-09-22 16:49:16] testing.INFO: OTP issued {"phone":"05****0001","user_type":"client","bypassed":true,"code":"1234"} 
+[2026-09-22 16:49:16] testing.INFO: OTP issued {"phone":"05****0001","user_type":"client","bypassed":true,"code":"1234"} 
+[2026-09-22 16:49:16] testing.INFO: OTP issued {"phone":"05****0001","user_type":"client","bypassed":true,"code":"1234"} 
+[2026-09-22 16:49:16] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"9003"} 
+[2026-09-22 16:49:16] testing.INFO: OTP issued {"phone":"05****9999","user_type":"client","bypassed":false,"code":"6594"} 
+[2026-09-22 16:49:16] testing.INFO: OTP issued {"phone":"05****9999","user_type":"vendor","bypassed":false,"code":"3725"} 
+[2026-09-22 16:49:16] testing.INFO: OTP issued {"phone":"05****0001","user_type":"client","bypassed":true,"code":"1234"} 
+[2026-09-22 16:49:16] testing.INFO: OTP issued {"phone":"05****0001","user_type":"client","bypassed":true,"code":"1234"} 
+[2026-09-22 16:49:16] testing.INFO: OTP issued {"phone":"05****0001","user_type":"client","bypassed":false,"code":"1536"} 
+[2026-09-22 16:49:55] local.INFO: OTP issued {"phone":"05****0003","user_type":"client","bypassed":true,"code":"1234"} 
+[2026-09-22 16:49:55] local.INFO: OTP issued {"phone":"05****4567","user_type":"vendor","bypassed":false,"code":"5176"} 
+[2026-09-22 16:49:56] local.INFO: OTP issued {"phone":"05****4568","user_type":"client","bypassed":false,"code":"2976"} 
+[2026-09-22 16:53:41] local.INFO: OTP issued {"phone":"05****0003","user_type":"client","bypassed":true,"code":"1234"} 
+[2026-09-22 16:53:41] local.INFO: OTP issued {"phone":"05****4567","user_type":"vendor","bypassed":false,"code":"7219"} 
+[2026-09-22 16:53:41] local.INFO: OTP issued {"phone":"05****4568","user_type":"client","bypassed":false,"code":"0783"} 

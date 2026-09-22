@@ -49,8 +49,11 @@ class DeleteAccountController extends Controller
             ], 500);
         }
 
-        // Delete OTPs associated with the client phone number
-        Otp::where('phone', $client->phone)->delete();
+        // Delete OTPs associated with the client phone number. Matched on the
+        // normalised value so a legacy row stored in another format is removed
+        // too — a leftover verified OTP would let the number be re-registered
+        // without a new verification.
+        Otp::forPhone($client->phone)->orWhere('phone', $client->phone)->delete();
 
         // Revoke all Sanctum tokens (personal_access_tokens uses polymorphic morph, no FK cascade)
         $client->tokens()->delete();

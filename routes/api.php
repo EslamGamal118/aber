@@ -71,9 +71,11 @@ use App\Http\Controllers\Api\Vendor\OffersController;
 /*==================================================================================*/
 
 // Auth Routes
+// Rate limited per IP: send-otp costs real money on the SMS gateway, and
+// verify-otp guards a 4-digit code (10k combinations).
 Route::controller(AuthController::class)->group(function () {
-    Route::post('/auth/send-otp', 'sendOtp');
-    Route::post('/auth/verify-otp', 'verifyOtp');
+    Route::post('/auth/send-otp', 'sendOtp')->middleware('throttle:10,1');
+    Route::post('/auth/verify-otp', 'verifyOtp')->middleware('throttle:15,1');
 });
 
 // Files Routes
@@ -92,8 +94,8 @@ Route::controller(CategoryController::class)->group(function () {
 Route::prefix('client')->group(function () {
 
     Route::controller(ClientsController::class)->group(function () {
-        Route::post('/register', 'register');
-        Route::post('/login', 'login');
+        Route::post('/register', 'register')->middleware('throttle:10,1');
+        Route::post('/login', 'login')->middleware('throttle:10,1');
         Route::post('/logout', 'logout')->middleware('auth:sanctum');
     });
 
@@ -185,10 +187,10 @@ Route::prefix('client')->group(function () {
     });
 
     // Client Reset Password Routes
-    Route::controller(ResetPasswordController::class)->group(function () {
+    Route::controller(ResetPasswordController::class)->middleware('throttle:10,1')->group(function () {
         Route::post('/reset-password/otp', 'resetPasswordOtp'); // Send OTP to the user's phone
         Route::post('/reset-password/verify-otp', 'verifyResetPasswordOtp'); // Verify the OTP sent to the user's phone
-        Route::put('/reset-password', 'resetPassword'); // Reset Password
+        Route::put('/reset-password', 'resetPassword'); // Reset Password (requires a freshly verified OTP)
     });
 });
 
@@ -199,15 +201,15 @@ Route::prefix('client')->group(function () {
 // Vendor Authentication Routes
 Route::prefix('vendor')->group(function () {
 
-        Route::controller(VendorAuthController::class)->group(function () {
+        Route::controller(VendorAuthController::class)->middleware('throttle:10,1')->group(function () {
             Route::post('/register','register');
             Route::post('/login',  'login');
         });
 
-        Route::controller(ForgetPasswordController::class)->group(function () {
+        Route::controller(ForgetPasswordController::class)->middleware('throttle:10,1')->group(function () {
             Route::post('/reset-password/otp', 'resetPasswordOtp'); // Send OTP to the user's phone
             Route::post('/reset-password/verify-otp', 'verifyResetPasswordOtp'); // Verify the OTP sent to the user's phone
-            Route::put('/reset-password', 'resetPassword'); // Reset Password
+            Route::put('/reset-password', 'resetPassword'); // Reset Password (requires a freshly verified OTP)
         });
 
     Route::middleware('auth:sanctum')->group(function () {

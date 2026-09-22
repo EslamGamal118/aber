@@ -4,32 +4,28 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Otp;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Log;
 use App\Services\ForJawalyService;
-use Carbon\Carbon;
+use App\Services\OtpService;
+use App\Support\PhoneNumber;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    protected $forJawalyService;
-
-    public function __construct(ForJawalyService $forJawalyService)
-    {
-        $this->forJawalyService = $forJawalyService;
+    public function __construct(
+        protected ForJawalyService $forJawalyService,
+        protected OtpService $otpService,
+    ) {
     }
 
-    // دالة توحيد صيغة الرقم لتكون موحدة في الإرسال والتحقق
-    private function normalizePhoneNumber($phone)
-    {
-        $normalized = preg_replace('/^\+?966/', '0', trim($phone));
-        if (!str_starts_with($normalized, '0') && strlen($normalized) == 9) {
-            $normalized = '0' . $normalized;
-        }
-        return $normalized;
-    }
-
-    public function sendOtp(Request $request)
+    /**
+     * POST /api/auth/send-otp
+     *
+     * Body: phone (any accepted format), type (client|vendor)
+     */
+    public function sendOtp(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
             'phone' => 'required|string|max:20',
@@ -39,143 +35,150 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
-                'errors' => $validator->errors()
+                'errors' => $validator->errors(),
             ], 400);
         }
 
-        $phone = $request->phone;
-        $normalizedPhone = $this->normalizePhoneNumber($phone);
+        $normalizedPhone = PhoneNumber::normalize($request->input('phone'));
 
-        // قائمة الأرقام المستثناة الموحدة
-        $bypassedPhones = [
-            '0500000001',
-            '0500000002',
-            '0500000003',
-            '0500000004',
-        ];
+        if ($normalizedPhone === '') {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid phone number.',
+            ], 400);
+        }
 
-        $isBypassed = in_array($normalizedPhone, $bypassedPhones);
-        $verificationCode = $isBypassed ? 1234 : rand(1000, 9999);
-        $expirationTime = Carbon::now()->addMinutes(10);
+        $result = $this->otpService->issue($normalizedPhone, $request->input('type'));
 
-        // حفظ الرقم بصيغته الأصلية أو الموحدة حسب رغبتك (هنا نحفظ المدخل أو الموحد)
-        $phoneRecord = Otp::updateOrCreate(
-            ['phone' => $phone],
-            [
-                'code' => $verificationCode,
-                'verified' => 0,
-                'expires_at' => $expirationTime,
-                'user_type' => $request->type,
-            ]
-        );
+        if ($result['status'] === OtpService::COOLDOWN) {
+            return response()->json([
+                'success' => false,
+                'message' => 'An OTP was already sent. Please wait before requesting another one.',
+                'phone' => $normalizedPhone,
+                'retry_after' => $result['retry_after'],
+            ], 429)->header('Retry-After', $result['retry_after']);
+        }
 
-        Log::info("Sending OTP to {$phone} with code {$verificationCode}");
-
-        if ($isBypassed) {
+        // Test numbers never touch the gateway; the record is already stored
+        // with the fixed code, so verify + register behave exactly as they do
+        // for a real number.
+        if ($result['bypassed']) {
             return response()->json([
                 'success' => true,
                 'message' => 'OTP sent successfully (Bypassed Number)',
-                'phone' => $phone,
-                'code' => 1234,
+                'phone' => $normalizedPhone,
+                'code' => $result['code'],
             ], 200);
         }
 
         try {
-            $result = $this->forJawalyService->sendSMS($phone, "Your account verification code is: {$verificationCode}");
+            $gatewayResponse = $this->forJawalyService->sendSMS(
+                PhoneNumber::forSms($normalizedPhone),
+                "Your account verification code is: {$result['code']}"
+            );
 
-            if (isset($result['code']) && $result['code'] === 200) {
-                return response()->json([
+            if ((int) ($gatewayResponse['code'] ?? 0) === 200) {
+                return response()->json(array_filter([
                     'success' => true,
                     'message' => 'OTP sent successfully',
-                    'phone' => $phone,
-                ], 200);
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Failed to send SMS via provider',
-                    'phone' => $phone,
-                    'sms_error' => $result['message'] ?? 'SMS Gateway Error'
-                ], 400);
+                    'phone' => $normalizedPhone,
+                    'code' => config('otp.expose_code') ? $result['code'] : null,
+                ], static fn ($value) => $value !== null), 200);
             }
-        } catch (\Exception $e) {
+
+            // The code was stored but never delivered: drop it so the user is
+            // not left with an unusable pending OTP blocking the cooldown.
+            $result['otp']?->delete();
+
+            Log::warning('OTP SMS rejected by gateway', [
+                'phone' => PhoneNumber::mask($normalizedPhone),
+                'response' => $gatewayResponse,
+            ]);
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to send SMS via provider',
+                'phone' => $normalizedPhone,
+                'sms_error' => $gatewayResponse['message'] ?? 'SMS Gateway Error',
+            ], 400);
+        } catch (\Throwable $e) {
+            $result['otp']?->delete();
+
+            Log::error('OTP SMS exception', [
+                'phone' => PhoneNumber::mask($normalizedPhone),
+                'error' => $e->getMessage(),
+            ]);
+
             return response()->json([
                 'success' => false,
                 'message' => 'SMS service exception occurred',
-                'phone' => $phone,
-                'error' => $e->getMessage()
+                'phone' => $normalizedPhone,
             ], 500);
         }
     }
 
-    /******************************************************************************************/
-    // Verify the OTP sent to the user's phone
-    public function verifyOtp(Request $request)
+    /**
+     * POST /api/auth/verify-otp
+     *
+     * Body: phone, otp (4 digits), type (optional: client|vendor)
+     *
+     * On success the `otps` row is persisted with verified = true and the
+     * audience in user_type — for bypassed numbers too. Registration reads
+     * exactly that row, so skipping this write is what used to produce
+     * "يجب التحقق من رقم الهاتف أولاً".
+     */
+    public function verifyOtp(Request $request): JsonResponse
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
+            'phone' => 'required|string|max:20',
             'otp' => 'required|digits:4',
-            'phone' => 'required',
+            'type' => 'nullable|in:' . implode(',', Otp::TYPES),
         ]);
 
-        $otp = $request->otp;
-        $phone = $request->phone;
-        $normalizedPhone = $this->normalizePhoneNumber($phone);
-
-        // الأرقام المستثناة للتحقق (يجب أن تتطابق مع دالة sendOtp وبـ 4 أرقام 1234)
-        $bypassedPhones = [
-            '0500000001',
-            '0500000002',
-            '0500000003',
-            '0500000004',
-        ];
-
-        if (in_array($normalizedPhone, $bypassedPhones)) {
-            if ($otp == '1234') {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Phone number verified successfully.',
-                    'phone' => $phone,
-                    'isVerified' => true,
-                ], 200);
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Invalid OTP. Please try again.',
-                ], 400);
-            }
-        }
-
-        $phoneRecord = Otp::where('phone', $phone)->first();
-
-        if (!$phoneRecord) {
+        if ($validator->fails()) {
             return response()->json([
                 'success' => false,
-                'message' => 'Phone number not found.',
-            ], 404);
-        }
-
-        if (Carbon::now()->greaterThan($phoneRecord->expires_at)) {
-            return response()->json([
-                'success' => false,
-                'message' => 'OTP has expired. Please request a new one.',
+                'errors' => $validator->errors(),
             ], 400);
         }
 
-        // Direct comparison of OTP
-        if ($otp == $phoneRecord->code) {
-            $phoneRecord->verified = true;
-            $phoneRecord->save();
+        $normalizedPhone = PhoneNumber::normalize($request->input('phone'));
 
-            return response()->json([
+        $result = $this->otpService->verify(
+            $normalizedPhone,
+            (string) $request->input('otp'),
+            $request->input('type')
+        );
+
+        return match ($result['status']) {
+            OtpService::OK => response()->json([
                 'success' => true,
                 'message' => 'Phone number verified successfully.',
-                'phone' => $phoneRecord->phone,
+                'phone' => $normalizedPhone,
+                'user_type' => $result['otp']?->user_type,
                 'isVerified' => true,
-            ], 200);
-        } else {
-            return response()->json([
+            ], 200),
+
+            OtpService::NOT_FOUND => response()->json([
+                'success' => false,
+                'message' => 'Phone number not found.',
+            ], 404),
+
+            OtpService::EXPIRED => response()->json([
+                'success' => false,
+                'message' => 'OTP has expired. Please request a new one.',
+            ], 400),
+
+            OtpService::TOO_MANY_ATTEMPTS => response()->json([
+                'success' => false,
+                'message' => 'Too many incorrect attempts. Please request a new OTP.',
+            ], 429),
+
+            default => response()->json([
                 'success' => false,
                 'message' => 'Invalid OTP. Please try again.',
-            ], 400);
-        }
+                'attempts_left' => $result['attempts_left'],
+            ], 400),
+        };
     }
 }
