@@ -1,0 +1,30 @@
+[07-Jan-2026 06:54:44 UTC] PHP Warning:  require(/home/tptcsa/public_html/abeer.tptc-sa.com/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/tptcsa/public_html/abeer.tptc-sa.com/public/index.php on line 14
+[07-Jan-2026 06:54:44 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/tptcsa/public_html/abeer.tptc-sa.com/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/tptcsa/public_html/abeer.tptc-sa.com/public/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/tptcsa/public_html/abeer.tptc-sa.com/public/index.php on line 14
+[07-Jan-2026 06:54:45 UTC] PHP Warning:  require(/home/tptcsa/public_html/abeer.tptc-sa.com/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/tptcsa/public_html/abeer.tptc-sa.com/public/index.php on line 14
+[07-Jan-2026 06:54:45 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/tptcsa/public_html/abeer.tptc-sa.com/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/tptcsa/public_html/abeer.tptc-sa.com/public/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/tptcsa/public_html/abeer.tptc-sa.com/public/index.php on line 14
+[07-Jan-2026 06:54:47 UTC] PHP Warning:  require(/home/tptcsa/public_html/abeer.tptc-sa.com/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/tptcsa/public_html/abeer.tptc-sa.com/public/index.php on line 14
+[07-Jan-2026 06:54:47 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/tptcsa/public_html/abeer.tptc-sa.com/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/tptcsa/public_html/abeer.tptc-sa.com/public/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/tptcsa/public_html/abeer.tptc-sa.com/public/index.php on line 14
+[07-Jan-2026 06:55:24 UTC] PHP Warning:  require(/home/tptcsa/public_html/abeer.tptc-sa.com/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/tptcsa/public_html/abeer.tptc-sa.com/public/index.php on line 14
+[07-Jan-2026 06:55:24 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/tptcsa/public_html/abeer.tptc-sa.com/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/tptcsa/public_html/abeer.tptc-sa.com/public/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/tptcsa/public_html/abeer.tptc-sa.com/public/index.php on line 14
+[07-Jan-2026 06:55:24 UTC] PHP Warning:  require(/home/tptcsa/public_html/abeer.tptc-sa.com/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/tptcsa/public_html/abeer.tptc-sa.com/public/index.php on line 14
+[07-Jan-2026 06:55:24 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/tptcsa/public_html/abeer.tptc-sa.com/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/tptcsa/public_html/abeer.tptc-sa.com/public/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/tptcsa/public_html/abeer.tptc-sa.com/public/index.php on line 14
+[07-Jan-2026 06:55:25 UTC] PHP Warning:  require(/home/tptcsa/public_html/abeer.tptc-sa.com/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/tptcsa/public_html/abeer.tptc-sa.com/public/index.php on line 14
+[07-Jan-2026 06:55:25 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/tptcsa/public_html/abeer.tptc-sa.com/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/tptcsa/public_html/abeer.tptc-sa.com/public/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/tptcsa/public_html/abeer.tptc-sa.com/public/index.php on line 14
